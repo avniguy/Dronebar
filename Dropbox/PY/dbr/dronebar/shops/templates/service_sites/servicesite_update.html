@@ -1,0 +1,78 @@
+  <!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Service Site Update</h1>
+
+
+  <form method="POST">
+    {% csrf_token %}
+    <!-- {{ form|crispy }} -->
+
+
+ <div class="form-group">
+     {{ form.name.errors }}
+     <label for="{{ form.name.id_for_label }}">Name</label>
+     {{ form.name }}
+ </div>
+
+ <div class="form-group">
+     {{ form.description.errors }}
+     <label for="{{ form.description.id_for_label }}">Description</label>
+     {{ form.description }}
+ </div>
+
+ <div class="form-group">
+     {{ form.lat.errors }}
+     <label for="{{ form.name.id_for_label }}">Lat</label>
+     {{ form.lat }}
+ </div>
+
+ <div class="form-group">
+     {{ form.long.errors }}
+     <label for="{{ form.long.id_for_label }}">Long</label>
+     {{ form.long }}
+     <h5 id='long_err'></h5>
+     <button type="button" class="btn btn-info" onClick="getLocation()">Get Current Location</button>
+ </div>
+
+ <div class="form-group">
+     {{ form.radius.errors }}
+     <label for="{{ form.radius.id_for_label }}">Radius</label>
+     {{ form.radius }}
+ </div>
+
+
+    <input class="btn btn-primary" type="submit" value="Save"/>
+    <a href="{% url 'shops:service_site_delete' servicesite.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+
+  </form>
+
+</div>
+
+
+<script>
+var lt = document.getElementById("id_lat");
+var ln = document.getElementById("id_long");
+var lnErr = document.getElementById("long_err");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    lnErr.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  lt.value= position.coords.latitude
+  ln.value= position.coords.longitude
+}
+</script>
+
+{% endblock %}

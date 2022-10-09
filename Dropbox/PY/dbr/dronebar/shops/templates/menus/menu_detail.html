@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Menu Detail</h1>
+
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" value='{{ menu.name }}' disabled>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" value="{{ menu.description }}" disabled>
+    </div>
+
+
+    <div class="form-group">
+
+        <label for='items'>Items:</label>
+
+        <!-- <ul style="border-style: solid; border-width:thin; border-color:blue; color:blue;" id='items'> -->
+          <table class="table" style="border-style: solid; border-width:thin; border-color:blue; color:blue;" >
+            <tr>
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Price</th>
+              <th>acion</th>
+            </tr>
+          {% for i in menu.items.all %}
+              <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.weight}}</td>
+                <td>{{i.price}}</td>
+                <td> <a href="{% url 'shops:menu_item_update' i.id %}">edit</a> </td>
+              </tr>
+
+
+          {% endfor %}
+        </table>
+        <!-- </ul> -->
+        <a href="{% url 'shops:menu_item_create' %}">Add New Item</a>
+    </div>
+
+
+
+    <a href="{% url 'shops:menu_update' menu.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+    <a href="{% url 'shops:menu_delete' menu.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+
+  </form>
+
+
+</div>
+
+
+{% endblock %}

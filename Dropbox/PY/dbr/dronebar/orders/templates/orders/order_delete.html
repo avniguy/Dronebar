@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Order Delete</h1>
+
+
+  <form class="order_delete_form" method="POST">
+
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <h1>Are you sure you wanna delete this order? {{object.name}}</h1>
+
+    <input class="btn btn-primary" type="submit" value="Yes"/>
+    <a href="{% url 'orders:order_list' %}">Cancel</a>
+  </form>
+
+
+</div>
+
+
+{% endblock %}

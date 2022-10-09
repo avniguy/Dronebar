@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Order List</h1>
+
+<table class="table">
+  <thead>
+    <th>Order Number</th>
+    <th>Status</th>
+    <th>Order Date</th>
+    <!-- <th class='right_handed'> <a href="{% url 'drones:drone_create' %}">Create New</a></th> -->
+  </thead>
+
+  <tbody>
+  {% for order in object_list %}
+    <tr class="default">
+      <td>{{ order.id }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.order_date }}</td>
+
+      <td>
+        <a href="order/{{order.id}}/detail"><button type="button" class="btn btn-info">Details</button></a>
+        <a href="{% url 'orders:order_update' order.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'orders:order_delete' order.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+      </td>
+
+    </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+
+
+{% endblock %}

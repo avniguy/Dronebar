@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Menu Item List</h1>
+
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Weight</th>
+    <th>Price</th>
+    <th class='right_handed'> <a href="{% url 'shops:menu_item_create' %}">Create New</a></th>
+    <!-- <th>Address</th>
+    <th>Active</th><th>Service Site</th><th>Menu</th> -->
+  </thead>
+
+  <tbody>
+  {% for m_item in object_list %}
+    <tr class="default">
+      <td>{{ m_item.name }}</td>
+      <td>{{ m_item.description }}</td>
+      <td>{{m_item.weight}}</td>
+      <td>{{m_item.price}}</td>
+
+      <td>
+        <a href="menuitem/{{m_item.id}}"><button type="button" class="btn btn-info">Details</button></a>
+        <a href="{% url 'shops:menu_item_update' m_item.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'shops:menu_item_delete' m_item.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+
+
+{% endblock %}

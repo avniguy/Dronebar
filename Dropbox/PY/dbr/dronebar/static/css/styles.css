@@ -1,0 +1,132 @@
+/* ************ NAVBAR CSS ***************** */
+/* Style the navigation menu */
+#emp{
+  color:blue;
+  text-color:blue;
+  font-weight: bold;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+#order_rows{
+  color:red;
+  text-color:red;
+  background:yellow;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+/*
+table{
+  border-style: solid;
+}
+
+td{
+  border-style: solid;
+  padding:10px;
+  } */
+  /* .blink{
+  		width:200px;
+  		height: 50px;
+  	    background-color: magenta;
+  		padding: 15px;
+  		text-align: center;
+  		line-height: 50px;
+  	}
+  	span{
+  		font-size: 25px;
+  		font-family: cursive;
+  		color: white;
+  		animation: blink 1s linear infinite;
+  	}
+  @keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+  } */
+
+@-webkit-keyframes processing {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+@-moz-keyframes processing {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+@-o-keyframes processing {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+@keyframes processing {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+.processing {
+  -webkit-animation: processing 1s infinite; /* Safari 4+ */
+  -moz-animation:    processing 1s infinite; /* Fx 5+ */
+  -o-animation:      processing 1s infinite; /* Opera 12+ */
+  animation:         processing 1s infinite; /* IE 10+ */
+}
+
+@-webkit-keyframes new {
+  from { background-color: green; }
+  to { background-color: inherit; }
+}
+@-moz-keyframes new {
+  from { background-color: green; }
+  to { background-color: inherit; }
+}
+@-o-keyframes new {
+  from { background-color: green; }
+  to { background-color: inherit; }
+}
+@keyframes new {
+  from { background-color: green; }
+  to { background-color: inherit; }
+}
+.new {
+  -webkit-animation: new 1s infinite; /* Safari 4+ */
+  -moz-animation:    new 1s infinite; /* Fx 5+ */
+  -o-animation:      new 1s infinite; /* Opera 12+ */
+  animation:         new 1s infinite; /* IE 10+ */
+}
+
+td {
+    padding: 1em;
+}
+}

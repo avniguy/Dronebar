@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Menu List</h1>
+
+<table class="table">
+  <thead>
+    <th>Menu</th><th>Description</th> <th>Items</th> <th class='right_handed'> <a href="{% url 'shops:menu_create' %}">Create New</a></th>
+    <!-- <th>Address</th>
+    <th>Active</th><th>Service Site</th><th>Menu</th> -->
+  </thead>
+
+  <tbody>
+  {% for menu in object_list %}
+    <tr class="default">
+      <td>{{ menu.name }}</td>
+      <td>{{ menu.description }}</td>
+      <td>{{menu.items.count}}</td>
+
+
+      <td> <a href="menu/{{menu.id}}"><button type="button" class="btn btn-info">Details</button></a>
+        <a href="{% url 'shops:menu_update' menu.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'shops:menu_delete' menu.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+
+
+{% endblock %}

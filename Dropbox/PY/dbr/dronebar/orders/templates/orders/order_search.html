@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+  <br><br>
+  <h1>Order Search</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="form-group">
+          <label for="from_date">From Date:</label>
+          <input class="form-control" id="date_from" name="date_from" placeholder="MM/DD/YYY" type="date"/>
+      </div>
+      <div class="form-group">
+          <label for="to_date">To Date:</label>
+          <input class="form-control" id="to_date" name="to_date" value=""  placeholder="MM/DD/YYY" type="date"/>
+      </div>
+      <div class="form-group">
+          <label for="status">Status:</label>
+          <select name="status" id="status" class="form-control" enabled>
+            <option value="All">--All--</option>
+            <option value="New">New</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delievered">Delievered</option>
+            <option value="Closed">Closed</option>
+            <option value="Canceled">Canceled</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Search</button>
+        <hr>
+      </div>
+    </form>
+
+    <form method="POST">
+      <div class="form-group">
+      <table class="table">
+        <thead>
+          <th>Order Number</th>
+          <th>Status</th>
+          <th>Order Date</th>
+          <!-- <th class='right_handed'> <a href="{% url 'drones:drone_create' %}">Create New</a></th> -->
+        </thead>
+
+        <tbody>
+        {% for o in orders %}
+          <tr class="default">
+            <td>{{ o.id }}</td>
+            <td>{{ o.status }}</td>
+            <td>{{ o.order_date }}</td>
+
+            <td>
+              <a href="order/{{o.id}}/detail"><button type="button" class="btn btn-info">Details</button></a>
+              <a href="{% url 'orders:order_update' o.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+              <a href="{% url 'orders:order_delete' o.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+            </td>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+
+      </table>
+    </div>
+
+    </form>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <br><br>
+  <h1>Drone List</h1>
+
+<table class="table">
+  <thead>
+    <th>Shop</th>
+    <th>Description</th>
+    <th>Shop Id</th>
+    <th>Drone Type</th>
+    <th class='right_handed'> <a href="{% url 'drones:drone_create' %}">Create New</a></th>
+  </thead>
+
+  <tbody>
+  {% for drone in object_list %}
+    <tr class="default">
+      <td>{{ drone.name }}</td>
+      <td>{{ drone.description }}</td>
+      <td>{{ drone.shop_id }}</td>
+      <td>{{ drone.drone_type }}</td>
+
+      <td>
+        <a href="drone/{{drone.id}}/detail"><button type="button" class="btn btn-info">Details</button></a>
+        <a href="{% url 'drones:drone_update' drone.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'drones:drone_delete' drone.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+      </td>
+
+    </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+
+
+{% endblock %}

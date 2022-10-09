@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Shop Delete</h1>
+
+
+  <form class="shop_form" method="POST">
+
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <h1>Are you sure you wanna delete this shop? {{object.name}}</h1>
+
+    <input class="btn btn-primary" type="submit" value="Yes"/> <a href="{% url 'shops:shop_list' %}">Cancel</a>
+  </form>
+
+
+</div>
+
+
+{% endblock %}

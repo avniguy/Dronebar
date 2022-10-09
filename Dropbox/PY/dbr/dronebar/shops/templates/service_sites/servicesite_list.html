@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Service Site List</h1>
+
+<table class="table">
+  <thead>
+    <th>Service Site</th><th>Description</th><th class='right_handed'> <a href="{% url 'shops:service_site_create' %}">Create New</a></th>
+  </thead>
+
+  <tbody>
+  {% for servicesite in object_list %}
+    <tr class="default">
+      <td>{{ servicesite.name }}</td>
+      <td>{{ servicesite.description }}</td>
+      <!-- <td> <a href="{% url 'shops:service_site_detail' id=servicesite.id %}"><button type="button" class="btn btn-info">Details</button></a>  </td> -->
+      <td>
+        <a href="service_site/{{servicesite.id}}/detail"><button type="button" class="btn btn-info">Details</button></a>
+        <a href="{% url 'shops:service_site_update' servicesite.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'shops:service_site_delete' servicesite.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+
+
+{% endblock %}

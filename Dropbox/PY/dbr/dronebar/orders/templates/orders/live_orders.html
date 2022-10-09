@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+  <br>
+  <br>
+  <h1>Live Orders</h1>
+  <br>
+
+  <form class="live_orders" name="live_orders" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="form-group">
+        <label for="shops">Shop:</label>
+        <select name="shops" id="shops" class="form-control" enabled>
+          <option value="0">-----</option>
+          {% for d in shops %}
+              <option value="{{d.id}}">{{d.name}}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+
+    <input class="btn btn-primary" type="submit" value="Get Orders" name="get_shops" id="get_shops"/>
+  </form>
+
+  <hr><br>
+
+  <form class="live_orders" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input type="hidden" id='order_id_proceed' name='order_id_proceed' value=''>
+    <input type="hidden" id='order_drone' name='order_drone' value=''>
+
+    <table class="table table-striped" id="live_orders_list">
+      <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Order Date</th>
+          <th>Customer Id</th>
+          <th>Status</th>
+          <th>Drone</th>
+          <th>Next Step</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for o in live_orders %}
+            <tr>
+              <td id="order_id">{{o.id}}</td>
+              <td>{{o.order_date}}</td>
+              <td>{{o.customer}}</td>
+                  {% if o.status == 'Processing' %}
+                    <td class='processing'>
+                  {% elif o.status == 'New' %}
+                    <td class='new'>
+                  {% else %}
+                    <td>
+                  {% endif %}
+                {{o.status}}
+              </td>
+              <td id="order_droan">
+                {% if o.status == 'Processing' %}
+                  <select name="drones" id="drones_select" enabled>
+                    <option value="0">-----</option>
+                    {% for d in drones %}
+                        <option value="{{d.id}}">{{d.name}}</option>
+                    {% endfor %}
+                  </select>
+                {% else %}
+                <label>
+                  {% for d in drones %}
+                      {% if d.id == o.drone_id %}
+                        {{d.name}}
+                      {% endif %}
+                  {% endfor %}
+                </label>
+                  <!-- <select name="drones_select" id="drones_select" disabled> -->
+                {% endif %}
+              </td>
+              <td>
+                {% if o.status == 'Processing' %}
+                  <button type="submit" class="btn btn-warning btn-sm" id="next_step" name="next_step" disabled>
+                    <span class="glyphicon glyphicon-fast-forward"></span> Go Drone
+                  </button>
+                  {% elif o.status == 'Delievered' %}
+                    <button type="submit" class="btn btn-success btn-sm" id="next_step" name="next_step" enabled>
+                      <span class="glyphicon glyphicon-fast-forward"></span> Finish
+                    </button>
+                {% else %}
+                  <button type="submit" class="btn btn-info btn-sm" id="next_step" name="next_step" enabled>
+                    <span class="glyphicon glyphicon-fast-forward"></span> Next Step
+                  </button>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- <input class="btn btn-primary" type="submit" value="Yes"/> -->
+  </form>
+
+
+</div>
+
+
+{% endblock %}

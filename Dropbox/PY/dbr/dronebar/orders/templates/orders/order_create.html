@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Order Create</h1>
+
+  <form method="get">
+
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-success">Get Items </button>
+    <hr>
+  </form>
+
+  {% if error_msg %}
+  <h1 style='color:red;'>{{error_msg}}</h1>
+
+  {% else %}
+  <form method="POST" id="order_form">
+    {% csrf_token %}
+
+    <div id="extra_returned_data">
+      <input type="hidden" id="total_order_data" name="total_order_data" value="">
+      <input type="hidden" id="shop_id" name="shop_id" value="">
+      <input type="hidden" id="location" name="location" value="">
+    </div>
+
+    <table id="order_rows">
+
+      {% if error_msg <= 0 %}
+        <h3>{{error_msg}}</h3>
+
+      {% else %}
+        <tr id='order_rows'>
+          {% for mi in menu_items %}
+            <td  style='border-style:solid; padding:10px;' id="order_item">
+              <a id = "menu_item" href="#" onClick="CreateOrderRow({{mi.id}},('{{mi.name}}'),('{{mi.description}}'),{{mi.price}},{{mi.weight}},1);">
+                {{ mi.name }}
+              </a>
+            </td>
+          {% endfor %}
+        </tr>
+
+      {% endif %}
+    </table>
+
+
+      <span>
+        <br><br>
+      <table class="table" id="order-table">
+        <input type="hidden" id="max_payload" value="{{max_payload}}"/>
+        <tr>
+          <th>Item Id</th>
+          <th>Item Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Weight</th>
+          <th>Quantity</th>
+          <th>Total Row Price</th>
+          <th>Total Row Weight</th>
+          <th>Action</th>
+
+        </tr>
+        <tr>
+          <td style="border-style:solid; border-width:1px;"><b>Total Order Price:</b></td>
+          <td id="total_order_price" style="border-style:solid; border-width:1px;">0</td>
+          <td style="border-style:solid; border-width:1px;"><b>Total Order Weight:</b></td>
+          <td id="total_order_weight" style="border-style:solid; border-width:1px;">0</td>
+        </tr>
+      </table>
+    </span>
+    <button type="submit" class="btn btn-success" id="submit_form">Post My Order</button>
+
+  </form>
+
+  {% endif %}
+
+
+</div>
+
+{% endblock %}

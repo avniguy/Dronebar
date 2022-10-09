@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br><br>
+<div class="container">
+
+  <h1>Shop Update</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input type="hidden" name="shop_droan_to_delete" id="shop_droan_to_delete" value=""/>
+
+    <h3>Drones</h3>
+    <table class="table" style="border-style: solid; border-width:thin; border-color:blue; color:blue;" >
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      {% for drone in drones.all %}
+        <tr class="shop_drones">
+            <td id="drone_id">{{drone.id}}</td>
+            <td><a href="{% url 'drones:drone_detail' drone.id %}">{{drone.name}}</a></td>
+            <td>{{drone.description}}</td>
+            <td><a href="#" id="shop_drone_delete"><span class="glyphicon glyphicon-trash"></span> Remove</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <input class="btn btn-primary" type="submit" value="Save"/>
+    <a href="{% url 'shops:shop_delete' shop.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+
+  </form>
+
+</div>
+
+
+{% endblock %}

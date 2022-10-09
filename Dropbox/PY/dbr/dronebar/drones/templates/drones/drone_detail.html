@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br><br>
+<div class="container">
+  <a href="{% url 'drones:drone_list' %}" style="align:right; float: right;">Drone List</a>
+
+  <h1>Drone Detail</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" value='{{ drone.name }}' disabled>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" value="{{ drone.description }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Drone Type:</label>
+        <input type="text" class="form-control" id="drone_type" value="{{ drone.drone_type }}" disabled>
+        <a href="{% url 'drones:drone_type_create' %}">Add New</a>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Shop:</label>
+        <input type="text" class="form-control" id="shop" value="{{ drone.shop }}" disabled>
+    </div>
+
+    <a href="{% url 'drones:drone_update' drone.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+    <a href="{% url 'drones:drone_delete' drone.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+
+  </form>
+
+</div>
+
+{% endblock %}

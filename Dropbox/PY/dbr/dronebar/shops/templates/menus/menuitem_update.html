@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+
+  <h1>Menu Item Update</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+
+    <input class="btn btn-primary" type="submit" value="Save"/>
+    <a href="{% url 'shops:menu_item_delete' menuitem.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+
+  </form>
+
+</div>
+
+
+{% endblock %}

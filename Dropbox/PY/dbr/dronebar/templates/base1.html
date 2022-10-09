@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/functionality.js' %}"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+
+
+    <!-- Top Navigation Menu -->
+    <div class="topnav">
+      <a href="#home" class="active">Logo</a>
+      <!-- Navigation links (hidden by default) -->
+      <div id="myLinks">
+        <!-- <a href="#news">shops</a> -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shops
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'shops:shop_list' %}">Shops</a></li>
+            <li><a href="{% url 'shops:shop_create' %}">Create New Shop</a></li>
+            <li><a href="{% url 'shops:service_site_list' %}">Service Sites</a></li>
+            <li><a href="{% url 'shops:service_site_create' %}">Create New Service Site</a></li>
+            <li><a href="{% url 'shops:menu_list' %}">Menus</a></li>
+            <li><a href="{% url 'shops:menu_create' %}">Create New Menu</a></li>
+            <li><a href="{% url 'shops:menu_item_list' %}">Menu Items</a></li>
+            <li><a href="{% url 'shops:menu_item_create' %}">Create New Menu Item</a></li>
+          </ul>
+        </li>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </div>
+      <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+
+
+      <!-- <nav class="navbar navbar-inverse" style="position:fixed ; vtop:0; width: 100%;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'dronebar/drone2.png' %}" alt="Dronebar"></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <i class="bi bi-house-door"></i>
+            <li class="active"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> Manage
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Shops Agreements</a></li>
+                <li><a href="#">Consumers</a></li>
+              </ul>
+            </li>
+ -->
+<!-- This is the shops section -->
+            <!-- <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shops
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'shops:shop_list' %}">Shops</a></li>
+                <li><a href="{% url 'shops:shop_create' %}">Create New Shop</a></li>
+                <li><a href="{% url 'shops:service_site_list' %}">Service Sites</a></li>
+                <li><a href="{% url 'shops:service_site_create' %}">Create New Service Site</a></li>
+                <li><a href="{% url 'shops:menu_list' %}">Menus</a></li>
+                <li><a href="{% url 'shops:menu_create' %}">Create New Menu</a></li>
+                <li><a href="{% url 'shops:menu_item_list' %}">Menu Items</a></li>
+                <li><a href="{% url 'shops:menu_item_create' %}">Create New Menu Item</a></li>
+              </ul>
+            </li>
+ -->
+<!-- This is the orders section -->
+            <!-- <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-pencil"></span> Orders
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Consumer Orders</a></li>
+                <li><a href="#">Pending Orders</a></li>
+                <li><a href="{% url 'orders:order_list' %}">All Orders</a></li>
+                <li><a href="{% url 'orders:order_search' %}">Search Orders</a></li>
+                <li><a href="{% url 'orders:order_create' %}">**Create Test Order**</a></li>
+              </ul>
+            </li> -->
+
+<!-- This is the drones section -->
+            <!-- <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-move"></span> Drone
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'drones:drone_list' %}">Drones</a></li>
+                <li><a href="{% url 'drones:drone_create' %}">Add New Drone</a></li>
+                <li><a href="{% url 'drones:drone_type_list' %}">Drone Types</a></li>
+                <li><a href="{% url 'drones:drone_type_create' %}">Add New Drone Type</a></li>
+                <li><a href="#">Drone Orders</a></li>
+              </ul>
+            </li>
+
+
+          </ul> -->
+
+          <!-- <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+              <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {% else %}
+              <li><a href="{% url 'create' %}"><span class="glyphicon glyphicon-user disabled"></span> Sign Up</a></li>
+              <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% endif %}
+          </ul>
+
+        </div>
+      </nav> -->
+
+  <div class="container">
+    {% block content %}
+
+    {% endblock %}
+  </div>
+
+  </body>
+</html>
